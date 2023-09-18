@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client'
+import { baseURL } from '../constants/appConstant';
 
 const Editor = () => {
     const toolbarOptions = [
@@ -43,7 +44,7 @@ const Editor = () => {
     }
 
     useEffect(() => {
-        const socketServer = io('http://localhost:9000')
+        const socketServer = io(baseURL)
         setSocket(socketServer)
 
         return () => {
