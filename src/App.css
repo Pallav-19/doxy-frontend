@@ -16,12 +16,13 @@ body {
   top: 0;
   z-index: 100;
   border: none !important;
-  height: 4rem;
   padding: 2rem;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.315);
+  flex-wrap: wrap;
+  gap: 4;
 }
 .ql-container.ql-snow {
-  width: 70%;
+  width: 80%;
   margin: 10px auto 10px auto !important;
   height: 100vh !important;
 }
@@ -30,7 +31,7 @@ body {
   background: #f5f5f5;
 }
 .ql-editor {
-  height: 100vh !important;
+  min-height: 100vh !important;
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.135);
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.142);
