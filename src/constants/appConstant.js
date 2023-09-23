@@ -1,3 +1,2 @@
-import { config } from "dotenv"
-config();
-export const baseURL = process.env.NODE_ENV === "production" ? "https://doxy-backend.onrender.com":"http://localhost:9000"
+
+export const baseURL = 0 ? "https://doxy-backend.onrender.com" : "http://localhost:9000"
