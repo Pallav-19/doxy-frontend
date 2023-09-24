@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import Title from '../navbar/Title';
 import UserMenu from '../navbar/UserMenu';
 import ActionsMenu from '../navbar/ActionsMenu';
+import { Typography } from '@mui/material';
 
 export const Navbar = () => {
     const { id } = useParams()
@@ -20,10 +21,14 @@ export const Navbar = () => {
 
                     </div>}
 
-                    {id &&
+                    {id ?
                         <Title
                             id={id}
                         />
+                        :
+                        <Typography variant='h4'>
+                            Doxy.
+                        </Typography>
                     }
                     <div style={{ marginLeft: 'auto' }}>
 

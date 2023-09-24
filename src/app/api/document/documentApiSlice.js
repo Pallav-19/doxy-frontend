@@ -23,9 +23,20 @@ const documentApiSlice = apiSlice.injectEndpoints({
                 body: { isPubliclyEditable },
                 method: 'PATCH',
             })
+        }),
+        getAllDocuments: builder.mutation({
+            query: x => ({
+                url: `${documentsApiRoute}/getAllDocuments`,
+                method: 'GET'
+            })
         })
 
     })
 })
 
-export const { useRenameMutation, useViewAccessMutation, useEditAccessMutation } = documentApiSlice
+export const {
+    useRenameMutation,
+    useViewAccessMutation,
+    useEditAccessMutation,
+    useGetAllDocumentsMutation } =
+    documentApiSlice
