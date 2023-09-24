@@ -3,7 +3,7 @@ import RegisterTab from './RegisterTab'
 import { Box, Container, Paper, Tab, Tabs, Typography } from '@mui/material'
 import LoginTab from './LoginTab'
 import { useSelector } from 'react-redux'
-import { currentAuthShowState } from '../../app/utilities/showAuthSlice'
+import { currentAuthShowState } from '../../features/utilities/showAuthSlice'
 
 const AuthLayout = () => {
     const [value, setValue] = React.useState(0);

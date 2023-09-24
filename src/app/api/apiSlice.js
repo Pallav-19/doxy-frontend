@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import { fetchBaseQuery, createApi } from '@reduxjs/toolkit/query/react'
-import { logout, setCredentials } from "../auth/authSlice"
-import { addNotification } from '../notifications/notificationSlice';
-const baseURL = process.env.NODE_ENV === "production" ? 'https://doxy-backend.onrender.com' : "http://localhost:9000"
+import { logout, setCredentials } from '../../features/auth/authSlice'
+import { addNotification } from '../../features/notifications/notificationSlice';
+import { baseURL } from '../../constants/appConstant';
+
 const baseQuery = fetchBaseQuery({
     baseUrl: baseURL,
     credentials: 'include',

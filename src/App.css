@@ -21,6 +21,9 @@ body {
   flex-wrap: wrap;
   gap: 4;
 }
+.ql-toolbar {
+  padding: 1rem !important;
+}
 .ql-container.ql-snow {
   width: 80%;
   margin: 10px auto 10px auto !important;
@@ -35,4 +38,18 @@ body {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.135);
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.142);
+  font-size: 1.5rem;
+}
+.rotating-icon {
+  animation: rotate 2s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

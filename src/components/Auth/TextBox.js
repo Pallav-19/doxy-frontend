@@ -2,7 +2,7 @@ import { ArrowBack, ArrowForward } from '@mui/icons-material'
 import { Button, Container, Typography } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { currentAuthShowState, toggleShow } from '../../app/utilities/showAuthSlice'
+import { currentAuthShowState, toggleShow } from '../../features/utilities/showAuthSlice'
 
 const TextBox = () => {
     const dispatch = useDispatch()
@@ -16,7 +16,7 @@ const TextBox = () => {
                 Doxy.
             </Typography>
             <Typography color={'secondary.dark'} variant='h5'>Collaborative Document Creation Made Effortless</Typography>
-            <Typography color={'secondary'}>"Doxy is the ultimate solution for modern document creation and collaborative work. Our platform empowers users to craft, edit, and collaborate on documents with unparalleled ease. Say goodbye to the complexities of traditional document editing and embrace a streamlined experience that lets you focus on your content. With real-time collaboration, multiple team members can work seamlessly together, regardless of their locations. Doxy's version control ensures that you never lose track of changes, making it easy to compare and revert to previous versions. Our commitment to top-notch security ensures that your data remains protected. Join Doxy and elevate your document productivity today."</Typography>
+            <Typography variant='h6' color={'secondary'}>"Doxy is the ultimate solution for modern document creation and collaborative work. Our platform empowers users to craft, edit, and collaborate on documents with unparalleled ease. Say goodbye to the complexities of traditional document editing and embrace a streamlined experience that lets you focus on your content. With real-time collaboration, multiple team members can work seamlessly together, regardless of their locations. Doxy's version control ensures that you never lose track of changes, making it easy to compare and revert to previous versions. Our commitment to top-notch security ensures that your data remains protected. Join Doxy and elevate your document productivity today."</Typography>
             <Button startIcon={showAuthState && <ArrowBack />} onClick={() => { handleClick() }} color='secondary' endIcon={!showAuthState && <ArrowForward />} variant='contained'>{showAuthState ? "Maybe Later":"Get Started"}</Button>
         </Container>
     )

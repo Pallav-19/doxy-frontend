@@ -1,7 +1,7 @@
 import React from 'react';
 import { Snackbar, SnackbarContent, IconButton, Box } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeNotification } from '../../app/notifications/notificationSlice';
+import { removeNotification } from '../../features/notifications/notificationSlice';
 import CloseIcon from '@mui/icons-material/Close';
 const Notifications = () => {
     const dispatch = useDispatch();

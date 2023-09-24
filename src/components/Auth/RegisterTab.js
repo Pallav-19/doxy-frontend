@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -10,16 +11,40 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-import { addNotification } from '../../app/notifications/notificationSlice';
+import { addNotification } from '../../features/notifications/notificationSlice';
+import { useRegisterMutation } from '../../app/api/auth/authApiSlice';
+import { setCredentials } from '../../features/auth/authSlice';
+import { setLoading, unsetLoading } from '../../features/utilities/loadingSlice';
 
 const RegisterTab = () => {
     const dispatch = useDispatch()
+    const [register, { isLoading, isError, error }] = useRegisterMutation()
+    useEffect(() => {
+        isLoading ? dispatch(setLoading()) : dispatch(unsetLoading())
+    }, [isLoading])
+    useEffect(() => {
+        if (isError) {
+            dispatch(addNotification({ id: Date.now(), message: error?.data?.message }))
+        }
+    }, [isError])
     const initialValues = {
         username: '',
         password: '',
         confirmPassword: '',
     };
 
+    const handleSignUp = async ({ username, password }) => {
+        try {
+            const { data } = await register({
+                username, password
+            })
+            dispatch(setCredentials({ token: data?.token, user: data?.user }))
+
+        } catch (err) {
+            dispatch(addNotification({ id: Date.now(), message: "Error Occured!" }))
+        }
+
+    }
     const validationSchema = Yup.object().shape({
         username: Yup.string().required('Username is required'),
         password: Yup.string().required('Password is required'),
@@ -32,9 +57,8 @@ const RegisterTab = () => {
         initialValues,
         validationSchema,
         onSubmit: (values) => {
-            dispatch(addNotification({ id: Date.now(), message: 'Toast message' }))
-
-            console.log('Registration Form Data:', values);
+            const { confirmPassword, ...restValues } = values
+            handleSignUp({ ...restValues })
         },
     });
 

@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import {
@@ -9,8 +10,15 @@ import {
     IconButton,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useLoginMutation } from '../../app/api/auth/authApiSlice';
+import { useDispatch } from 'react-redux';
+import { addNotification } from '../../features/notifications/notificationSlice';
+import { setCredentials } from '../../features/auth/authSlice';
+import { setLoading, unsetLoading } from '../../features/utilities/loadingSlice';
 
 const LoginTab = () => {
+    const [login, { isLoading, error, isError }] = useLoginMutation()
+    const dispatch = useDispatch()
     const initialValues = {
         username: '',
         password: '',
@@ -20,15 +28,30 @@ const LoginTab = () => {
         username: Yup.string().required('Username is required'),
         password: Yup.string().required('Password is required'),
     });
-
+    useEffect(() => {
+        isLoading ? dispatch(setLoading()) : dispatch(unsetLoading())
+    }, [isLoading])
+    useEffect(() => {
+        if (isError) {
+            dispatch(addNotification({ id: Date.now(), message: error?.data?.message }))
+        }
+    }, [isError])
     const formik = useFormik({
         initialValues,
         validationSchema,
         onSubmit: (values) => {
-            console.log('Login Form Data:', values);
+            handleLogin(values)
         },
     });
+    const handleLogin = async ({ username, password }) => {
+        try {
+            const { data } = await login({ username, password })
+            dispatch(setCredentials({ token: data?.token, user: data?.user }))
 
+        } catch (err) {
+            dispatch(addNotification({ id: Date.now(), message: "Error occured!" }))
+        }
+    }
     const [showPassword, setShowPassword] = React.useState(false);
 
     const handleShowPassword = () => {
