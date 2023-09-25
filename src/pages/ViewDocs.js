@@ -28,12 +28,12 @@ const ViewDocs = () => {
         })
     }, [])
     return (
-        <Box sx={{ height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: { xs: '1rem', md: "3rem" }, gap: { xs: 4, md: 10 } }}>
+        <Box sx={{ height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: { xs: '1rem', md: "3rem" }, gap: { xs: 4, md: 6 } }}>
             <MenuBar />
-            {!isLoading && allDocuments?.length ? < div >
-                <Typography variant='h4' sx={{ marginBottom: '0.8rem' }}>My Documents</Typography>
+            {!isLoading && allDocuments?.length ? < Box sx={{ maxWidth: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', }} >
+                <Typography variant='h5' sx={{ marginRight: 'auto', mb: 4 }}>My Documents</Typography>
                 <DocsTable />
-            </div> :
+            </Box> :
                 <>
                     <Box sx={{
                         background: `url(${noData})`,

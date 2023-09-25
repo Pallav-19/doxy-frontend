@@ -12,7 +12,11 @@ const AuthLayout = () => {
         setValue(newValue);
     };
     return (
-        <Container sx={{ display: showAuth ? 'flex' : 'none', alignItems: 'center', justifyContent: 'center', flex: 1 }} >
+        <Container
+            sx={{
+                display: showAuth ? 'flex' : 'none',
+                alignItems: 'center', justifyContent: 'center', flex: 1
+            }} >
             <Paper elevation={3}>
                 <Box borderBottom={1} borderColor={'divider'}>
                     <Tabs variant='fullWidth' textColor='secondary' indicatorColor='secondary' value={value} onChange={handleChange}  >
@@ -26,6 +30,7 @@ const AuthLayout = () => {
                 <TabPanel value={value} index={1}>
                     <RegisterTab />
                 </TabPanel>
+
             </Paper>
         </Container>
     )

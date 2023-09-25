@@ -7,6 +7,7 @@ import loadingSlice from "../features/utilities/loadingSlice";
 import titleSlice from "../features/utilities/titleSlice";
 import accessSlice from "../features/utilities/accessSlice";
 import documentSlice from "../features/documents/documentSlice";
+import accessDrawerSlice from "../features/utilities/accessDrawerSlice";
 
 export const store = configureStore({
     reducer: {
@@ -18,6 +19,8 @@ export const store = configureStore({
         title: titleSlice,
         access: accessSlice,
         document: documentSlice,
+        accessDrawer: accessDrawerSlice
+
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware)
 })

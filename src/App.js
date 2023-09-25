@@ -15,6 +15,7 @@ import Notifications from './components/services/Notifications'
 import { Loader } from './components/misc/Loader'
 import PersistentUserLogin from './components/misc/PersistentUserLogin'
 import Editor from './components/Editor/Editor'
+import Profile from './pages/Profile'
 
 const App = () => {
 
@@ -35,6 +36,7 @@ const App = () => {
                   } >
                   <Route path='/' exact element={<ViewDocs />} />
                   <Route path='/:id' exact element={<Editor />} />
+                  <Route path='/profile' exact element={<Profile />} />
                 </Route>
               </Route>
               <Route path='*' element={<NotFound />} />

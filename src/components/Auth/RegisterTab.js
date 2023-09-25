@@ -15,6 +15,7 @@ import { addNotification } from '../../features/notifications/notificationSlice'
 import { useRegisterMutation } from '../../app/api/auth/authApiSlice';
 import { setCredentials } from '../../features/auth/authSlice';
 import { setLoading, unsetLoading } from '../../features/utilities/loadingSlice';
+import { toggleShow } from '../../features/utilities/showAuthSlice';
 
 const RegisterTab = () => {
     const dispatch = useDispatch()
@@ -39,6 +40,8 @@ const RegisterTab = () => {
                 username, password
             })
             dispatch(setCredentials({ token: data?.token, user: data?.user }))
+            dispatch(addNotification({ id: Date.now(), message: "Welcome to Doxy." }))
+
 
         } catch (err) {
             dispatch(addNotification({ id: Date.now(), message: "Error Occured!" }))
@@ -143,6 +146,17 @@ const RegisterTab = () => {
                 sx={{ mt: 3 }}
             >
                 Register
+            </Button>
+            <Button
+                fullWidth
+                sx={{ mt: 3 }}
+                variant='outlined'
+                color='error'
+                onClick={() => {
+                    dispatch(toggleShow())
+                }}
+            >
+                Cancel
             </Button>
         </form>
     );

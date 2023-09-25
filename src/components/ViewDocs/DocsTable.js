@@ -12,7 +12,7 @@ export function DocsTable() {
 
 
     return (
-        <div style={{ height: 400, width: '100%', backgroundColor: 'white' }}>
+        <div style={{ height: 400, maxWidth: '100%', backgroundColor: 'white' }}>
             <DataGrid
                 getRowId={getRowId}
                 rows={allDocumets}

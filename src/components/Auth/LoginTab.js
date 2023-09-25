@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { addNotification } from '../../features/notifications/notificationSlice';
 import { setCredentials } from '../../features/auth/authSlice';
 import { setLoading, unsetLoading } from '../../features/utilities/loadingSlice';
+import { toggleShow } from '../../features/utilities/showAuthSlice';
 
 const LoginTab = () => {
     const [login, { isLoading, error, isError }] = useLoginMutation()
@@ -102,6 +103,17 @@ const LoginTab = () => {
                 sx={{ mt: 3 }}
             >
                 Login
+            </Button>
+            <Button
+                onClick={() => {
+                    dispatch(toggleShow())
+                }}
+                variant='outlined'
+                color='error'
+                fullWidth
+                sx={{ mt: 3 }}
+            >
+                Cancel
             </Button>
         </form>
     );

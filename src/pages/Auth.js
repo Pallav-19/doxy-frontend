@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
 import AuthLayout from '../components/Auth/AuthLayout';
 import TextBox from '../components/Auth/TextBox';
@@ -15,18 +15,21 @@ export default function Auth() {
       navigate("/")
     }
   }, [token])
-
+  const scrollRef = useRef(null)
   return (
-    <Box sx={{
-      display: 'flex',
-      width: '100vw',
-      height: "100vh",
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      gap: 5
-
-    }}>
-      <TextBox />
+    <Box
+      ref={scrollRef}
+      sx={{
+        display: 'flex',
+        width: '100vw',
+        height: { md: "100vh" },
+        minHeight: { xs: '100vh' },
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        gap: 5,
+        flexDirection: { md: 'row', xs: 'column' }
+      }}>
+      <TextBox scrollRef={scrollRef} />
       <AuthLayout />
     </Box>
   );

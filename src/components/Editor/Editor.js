@@ -11,9 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { currentUser } from '../../features/auth/authSlice';
 import { addNotification } from '../../features/notifications/notificationSlice';
 import { currentDocumentTitle, setTitle } from '../../features/utilities/titleSlice';
-import { setIsPubliclyEditable, setPubliclyViewed } from '../../features/utilities/accessSlice';
+import { setIsPubliclyEditable, setOwner, setPubliclyViewed } from '../../features/utilities/accessSlice';
 import { CloudDone, Error, IosShare, Sync, } from '@mui/icons-material';
-
+import { AccessDrawer } from '../misc/AccessDrawer';
+import EditOffIcon from '@mui/icons-material/EditOff';
 const Editor = () => {
     const toolbarOptions = [
         ['bold', 'italic', 'underline', 'strike'],
@@ -88,18 +89,21 @@ const Editor = () => {
 
         })
         socket && socket?.on('load-document', ({ data, title, isPublic, publiclyEditable, }) => {
+
             setValue(data)
             setReadOnly(false)
             dispatch(setTitle(title))
             dispatch(setIsPubliclyEditable(publiclyEditable))
             dispatch(setPubliclyViewed(isPublic))
         })
+
         socket && socket.on('access-denied', ({ message }) => {
             dispatch(addNotification({ id: Date.now(), message }))
             navigate("/")
         })
         socket && socket.on("can-edit", canEdit => {
             setReadOnly(!canEdit)
+            dispatch(setOwner(true))
         })
         socket && socket?.emit('get-document', { id, userId: user?._id })
         let interval;
@@ -110,6 +114,7 @@ const Editor = () => {
             dispatch(setTitle(''))
             dispatch(setIsPubliclyEditable(false))
             dispatch(setPubliclyViewed(false))
+            dispatch(setOwner(false))
         }
     }, [socket, id, user?._id])
 
@@ -165,7 +170,7 @@ const Editor = () => {
             >
                 Share
             </Button>
-            <IconButton
+            {!readOnly ? <IconButton
                 color='primary'
                 size='large'
                 sx={{
@@ -175,9 +180,31 @@ const Editor = () => {
 
                 }} >
                 {
-                    !savingError ? (saving ? <Sync className='rotating-icon' fontSize='3rem' color='secondary' /> : <CloudDone fontSize='3rem' color='secondary' />) : <Error fontSize='3rem' color='danger' />
+                    (!savingError) ? (saving ?
+                        <Sync
+                            className='rotating-icon'
+                            fontSize='3rem' color='secondary' /> :
+                        <CloudDone
+                            fontSize='3rem'
+                            color='secondary' />) :
+                        <Error
+                            fontSize='3rem'
+                            color='error' />
                 }
-            </IconButton>
+            </IconButton> :
+                <IconButton
+                    size='large'
+                    sx={{
+                        position: 'fixed',
+                        bottom: 15,
+                        left: 15,
+
+                    }}
+                >
+                    <EditOffIcon fontSize='3rem' disabled />
+                </IconButton>}
+            {(id && !readOnly) && <AccessDrawer id={id} />}
+
         </>
     )
 

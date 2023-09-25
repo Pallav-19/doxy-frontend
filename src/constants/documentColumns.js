@@ -6,12 +6,14 @@ export const documentColumns = [
 
             return (
                 <>
-                    <Link to={`/${params.row._id}`}>
+                    <Link onClick={() => { 
+                        
+                    }} to={`/${params.row._id}`}>
                         {params?.row?.title}
                     </Link>
                 </>
             )
-        }, width: 300
+        }, width: 250
     },
     {
         field: 'createdBy', headerName: 'Owner', renderCell: (params) => {
@@ -20,7 +22,7 @@ export const documentColumns = [
                     {params?.row?.createdBy?.username}
                 </>
             )
-        }, width: 270
+        }, width: 200
     },
     {
         field: 'createdAt', headerName: 'Created At',
@@ -31,7 +33,7 @@ export const documentColumns = [
                     {new Date(params.row.createdAt).toLocaleString()}
                 </>
             )
-        }, width: 300
+        }, width: 250
     },
 
     {
@@ -44,7 +46,7 @@ export const documentColumns = [
                     {new Date(params.row.updatedAt).toLocaleString()}
                 </>
             )
-        }, width: 300
+        }, width: 250
     },
     {
         field: 'lastUpdatedBy', headerName: 'Last Updated By', renderCell: (params) => {
@@ -53,6 +55,6 @@ export const documentColumns = [
                     {params.row?.lastUpdatedBy?.username}
                 </>
             )
-        }, width: 300
+        }, width: 200
     },
 ];
