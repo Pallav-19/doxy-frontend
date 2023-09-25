@@ -5,14 +5,16 @@ import AuthLayout from '../components/Auth/AuthLayout';
 import TextBox from '../components/Auth/TextBox';
 import { useSelector } from 'react-redux';
 import { currentToken } from '../features/auth/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Auth() {
   const token = useSelector(currentToken)
   const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || "/"
   useEffect(() => {
     if (token) {
-      navigate("/")
+      navigate(from)
     }
   }, [token])
   const scrollRef = useRef(null)
@@ -26,7 +28,7 @@ export default function Auth() {
         minHeight: { xs: '100vh' },
         alignItems: 'center',
         justifyContent: 'space-around',
-        gap: 5,
+        gap: { md: 5, xs: 3 },
         flexDirection: { md: 'row', xs: 'column' }
       }}>
       <TextBox scrollRef={scrollRef} />
