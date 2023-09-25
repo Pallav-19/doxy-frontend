@@ -15,7 +15,7 @@ const Title = ({ id }) => {
     const title = useSelector(currentDocumentTitle)
     const [rename, { isError, error, isLoading }] = useRenameMutation()
     const [isEditing, setIsEditing] = React.useState(false)
-    const [residualTitle, setResidualTitle] = React.useState('')
+    const [residualTitle, setResidualTitle] = React.useState('') 
     const focusRef = React.useRef(null)
 
     React.useEffect(() => {

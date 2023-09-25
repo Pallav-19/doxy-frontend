@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import MenuBar from '../components/ViewDocs/MenuBar'
 import { DocsTable } from '../components/ViewDocs/DocsTable'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,8 +10,13 @@ import { useGetAllDocumentsMutation } from '../app/api/document/documentApiSlice
 import { addNotification } from '../features/notifications/notificationSlice'
 import { setLoading, unsetLoading } from '../features/utilities/loadingSlice'
 const ViewDocs = () => {
+    const [search, setSearch] = useState('')
     const allDocuments = useSelector(currentAllDocuments)
-    const [getAllDocuments, { isLoading, error, isError }] = useGetAllDocumentsMutation()
+    const
+        [getAllDocuments,
+            { isLoading, error, isError }
+        ]
+            = useGetAllDocumentsMutation()
     const dispatch = useDispatch()
     React.useEffect(() => {
         isLoading ? dispatch(setLoading()) : dispatch(unsetLoading())
@@ -21,17 +26,38 @@ const ViewDocs = () => {
     }, [isLoading, error, isError])
     React.useEffect(() => {
 
-        getAllDocuments().then((res => {
+        getAllDocuments({ title: search }).then((res => {
             dispatch(loadDocuments({ results: res?.data?.result }))
         })).catch(err => {
             dispatch(addNotification({ id: Date.now(), message: "Error" }))
         })
-    }, [])
+    }, [search])
     return (
-        <Box sx={{ height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: { xs: '1rem', md: "3rem" }, gap: { xs: 4, md: 6 } }}>
-            <MenuBar />
-            {!isLoading && allDocuments?.length ? < Box sx={{ maxWidth: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', }} >
-                <Typography variant='h5' sx={{ marginRight: 'auto', mb: 4 }}>My Documents</Typography>
+        <Box
+            sx={{
+                height: '100vh',
+                width: '100vw',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: { xs: '1rem', md: "3rem" },
+                gap: { xs: 4, md: 6 }
+            }}>
+            <MenuBar
+                search={search}
+                setSearch={setSearch}
+            />
+            {!isLoading && allDocuments?.length ? < Box
+                sx={{
+                    maxWidth: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }} >
+                <Typography
+                    variant='h5'
+                    sx={{ marginRight: 'auto', mb: 4 }}>My Documents</Typography>
                 <DocsTable />
             </Box> :
                 <>

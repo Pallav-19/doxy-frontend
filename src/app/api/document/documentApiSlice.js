@@ -25,10 +25,14 @@ const documentApiSlice = apiSlice.injectEndpoints({
             })
         }),
         getAllDocuments: builder.mutation({
-            query: x => ({
-                url: `${documentsApiRoute}/getAllDocuments`,
-                method: 'GET'
-            })
+            query: ({ title }) => {
+                let query = ''
+                if (title) query += `?title=${title}`;
+                return {
+                    url: `${documentsApiRoute}/getAllDocuments${query}`,
+                    method: 'GET'
+                }
+            }
         })
 
     })
