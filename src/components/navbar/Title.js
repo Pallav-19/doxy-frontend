@@ -7,6 +7,7 @@ import { currentDocumentTitle, setTitle } from '../../features/utilities/titleSl
 import { Edit } from '@mui/icons-material'
 import { addNotification } from '../../features/notifications/notificationSlice'
 import { useRenameMutation } from '../../app/api/document/documentApiSlice'
+import { isWoner } from '../../features/utilities/accessSlice'
 
 const Title = ({ id }) => {
     const dispatch = useDispatch()
@@ -36,6 +37,7 @@ const Title = ({ id }) => {
             handleChange()
         }, 0)
     }
+    const isOwner = useSelector(isWoner)
     return (
         <TextField
             onMouseEnter={() => { setViewEdit(true) }}
@@ -71,7 +73,7 @@ const Title = ({ id }) => {
             value={title}
             InputProps={{
                 style: { fontSize: '1.2rem' },
-                readOnly: !isEditing,
+                readOnly: !isEditing && !isOwner,
                 inputRef: focusRef,
                 endAdornment:
                     (
