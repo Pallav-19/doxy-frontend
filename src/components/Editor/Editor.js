@@ -103,7 +103,7 @@ const Editor = () => {
         })
         socket && socket.on("can-edit", canEdit => {
             setReadOnly(!canEdit)
-            dispatch(setOwner(true))
+            dispatch(setOwner(canEdit))
         })
         socket && socket?.emit('get-document', { id, userId: user?._id })
         let interval;
@@ -114,9 +114,8 @@ const Editor = () => {
             dispatch(setTitle(''))
             dispatch(setIsPubliclyEditable(false))
             dispatch(setPubliclyViewed(false))
-            dispatch(setOwner(false))
         }
-    }, [socket, id, user?._id])
+    }, [socket, id, user?._id,])
 
     useEffect(() => {
         if (!readOnly) {
