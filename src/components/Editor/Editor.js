@@ -115,7 +115,7 @@ const Editor = () => {
             dispatch(setIsPubliclyEditable(false))
             dispatch(setPubliclyViewed(false))
         }
-    }, [socket, id, user?._id,])
+    }, [socket, id, user?._id])
 
     useEffect(() => {
         if (!readOnly) {
