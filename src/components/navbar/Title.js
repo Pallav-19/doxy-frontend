@@ -23,6 +23,7 @@ const Title = ({ id }) => {
             dispatch(addNotification({ id: Date.now(), message: error?.data?.message || "Error" }))
             setResidualTitle(error?.data?.title)
         }
+        console.log(isOwner);
     }, [isError])
     const handleTitleChange = async (title) => {
         dispatch(setTitle(title))
@@ -73,12 +74,17 @@ const Title = ({ id }) => {
             value={title}
             InputProps={{
                 style: { fontSize: '1.2rem' },
-                readOnly: !isEditing && !isOwner,
+                readOnly: !isEditing || !isOwner,
                 inputRef: focusRef,
                 endAdornment:
                     (
-                        <InputAdornment sx={{ display: (!viewEdit) && 'none' }} position='start'>
-                            {isLoading ? <CircularProgress size={20} color='info' /> : <Edit color='info' />}
+                        <InputAdornment
+                            sx={{ display: (!viewEdit || !isOwner) && 'none' }}
+                            position='start'>
+                            {isLoading ? <CircularProgress
+                                size={20}
+                                color='info' /> : <Edit
+                                color='info' />}
                         </InputAdornment>
                     ),
 
