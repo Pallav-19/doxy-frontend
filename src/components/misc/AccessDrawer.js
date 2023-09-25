@@ -31,7 +31,7 @@ export function AccessDrawer({ id }) {
     const [getViewers] = useGetViewersMutation()
     const viewers = useSelector(currentViewers)
     const viewersOptions = useSelector(currentViewersOptions)
-    
+
     React.useEffect(() => {
         const fetchCollaboratorOptions = async () => {
             try {
@@ -51,9 +51,9 @@ export function AccessDrawer({ id }) {
                 dispatch(addNotification({ message: "Error", id: Date.now() }))
             }
         }
-        fetchCollaborators()
-        fetchCollaboratorOptions()
-    }, [refetch, id])
+        open && fetchCollaborators()
+        open && fetchCollaboratorOptions()
+    }, [refetch, id, open])
     React.useEffect(() => {
         const fetchViewerOptions = async () => {
             try {
@@ -73,9 +73,9 @@ export function AccessDrawer({ id }) {
                 dispatch(addNotification({ message: "Error", id: Date.now() }))
             }
         }
-        fetchViewers()
-        fetchViewerOptions()
-    }, [refetchViewer, refetch, id])
+        open && fetchViewers()
+        open && fetchViewerOptions()
+    }, [refetchViewer, refetch, id, open])
     return (
         <div>
             <Drawer

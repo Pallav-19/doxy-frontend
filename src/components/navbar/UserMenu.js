@@ -4,14 +4,14 @@ import React from 'react'
 import { addNotification } from '../../features/notifications/notificationSlice'
 import { logout as StateLogout } from '../../features/auth/authSlice'
 import { useDispatch } from 'react-redux'
-import { useLoginMutation } from '../../app/api/auth/authApiSlice'
+import { useLogoutMutation } from '../../app/api/auth/authApiSlice'
 import { useNavigate } from 'react-router-dom'
 
 const UserMenu = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [logout] = useLoginMutation()
+    const [logout] = useLogoutMutation()
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
