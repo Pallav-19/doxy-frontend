@@ -76,7 +76,6 @@ const Editor = () => {
     useEffect(() => {
         const socketServer = io(baseURL)
         setSocket(socketServer)
-
         return () => {
             socketServer?.disconnect()
         }

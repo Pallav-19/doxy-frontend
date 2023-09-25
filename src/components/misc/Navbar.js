@@ -15,7 +15,7 @@ export const Navbar = () => {
     const { id } = useParams()
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar variant='outlined' position="sticky" sx={{ top: 0, left: 0 }} color="primary" >
+            <AppBar variant='elevation' position="sticky" sx={{ top: 0, left: 0 }} color="primary" >
                 <Toolbar>
                     {id && <div>
                         <ActionsMenu id={id} />

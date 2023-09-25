@@ -8,11 +8,14 @@ import { documentColumns } from '../../constants/documentColumns';
 export function DocsTable() {
     const allDocumets = useSelector(currentAllDocuments)
     const getRowId = (row) => row._id;
-
-
-
     return (
-        <div style={{ height: 400, maxWidth: '100%', backgroundColor: 'white' }}>
+        <div style={{
+            height: 450,
+            maxWidth: '100%',
+            backgroundColor: 'white',
+            borderRadius: '0.5rem',
+            padding: '0.5rem'
+        }}>
             <DataGrid
                 getRowId={getRowId}
                 rows={allDocumets}
@@ -23,9 +26,6 @@ export function DocsTable() {
                     },
                 }}
                 pageSizeOptions={[5, 10]}
-                checkboxSelection
-                autoPageSize
-
             />
         </div>
     );

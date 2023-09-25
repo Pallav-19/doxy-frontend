@@ -35,13 +35,12 @@ const ViewDocs = () => {
     return (
         <Box
             sx={{
-                height: '100vh',
                 width: '100vw',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 padding: { xs: '1rem', md: "3rem" },
-                gap: { xs: 4, md: 6 }
+                gap: { xs: 1, }
             }}>
             <MenuBar
                 search={search}
@@ -49,6 +48,7 @@ const ViewDocs = () => {
             />
             {!isLoading && allDocuments?.length ? < Box
                 sx={{
+                    minHeight: '100vh',
                     maxWidth: '100%',
                     display: 'flex',
                     flexDirection: 'column',
@@ -61,7 +61,7 @@ const ViewDocs = () => {
                 <DocsTable />
             </Box> :
                 <>
-                    <Box sx={{
+                    {!isLoading && <Box sx={{
                         background: `url(${noData})`,
                         backgroundSize: 'contain',
                         backgroundPosition: 'center',
@@ -70,7 +70,7 @@ const ViewDocs = () => {
                         width: "100%"
                     }}>
 
-                    </Box>
+                    </Box>}
 
 
                 </>}
