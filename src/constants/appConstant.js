@@ -1,4 +1,4 @@
 
-export const baseURL = process.env.BASE_URL
+export const baseURL = "https://pallav.site"
 
 export const documentsApiRoute = "/api/document"
